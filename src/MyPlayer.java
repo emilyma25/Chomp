@@ -1,11 +1,16 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MyPlayer {
     public Chip[][] gameBoard;
     public int[] columns;
+    public ArrayList<Boards> LifeBoards;
+    public ArrayList<Boards> DeathBoards;
 
     public MyPlayer() {
         columns = new int[10];
+        DeathBoards = new ArrayList<>();
+        LifeBoards = new ArrayList<>();
 
         /***
          * This code will run just once, when the game opens.
@@ -18,6 +23,10 @@ public class MyPlayer {
                         System.out.println(" ");
                         System.out.println(a + ": " + b + ": " + c);
                         System.out.println("resulting boards:");
+
+                        //make an array list for each board of its resulting boards
+                        //run through to check for life or death
+                        //clear at end and restart??
 //
 //                        for (int newa = a; newa > 0; newa--){
 //                            for (int newb = b; newb >=0; newb--){
@@ -31,7 +40,6 @@ public class MyPlayer {
 
 
                         for (int newc = c; newc >= 0; newc--) {
-                            //System.out.println(a + ": " + b + ": " + newc + ": " + c);
                             if (newc != c) {
                                 System.out.println(a + ": " + b + ": " + newc);
                             }
@@ -99,11 +107,20 @@ public class MyPlayer {
 //                            }
 
 
-                            }
-                        }
+
                     }
                 }
             }
+        }
+
+        categorizeBoards();
+
+    }
+
+    public void categorizeBoards(){
+
+        DeathBoards.add(new Boards(1,0,0));
+    }
 
 
     public Point move(Chip[][] pBoard) {
