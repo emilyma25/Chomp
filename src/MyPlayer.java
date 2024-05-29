@@ -11,6 +11,7 @@ public class MyPlayer {
         columns = new int[10];
         DeathBoards = new ArrayList<>();
         LifeBoards = new ArrayList<>();
+       // DeathBoards.add(new Boards(1,0,0));
 
         /***
          * This code will run just once, when the game opens.
@@ -23,25 +24,17 @@ public class MyPlayer {
                         System.out.println(" ");
                         System.out.println(a + ": " + b + ": " + c);
                         System.out.println("resulting boards:");
+                        ArrayList<Boards> ResultingBoards = new ArrayList<>();
 
                         //make an array list for each board of its resulting boards
                         //run through to check for life or death
                         //clear at end and restart??
-//
-//                        for (int newa = a; newa > 0; newa--){
-//                            for (int newb = b; newb >=0; newb--){
-//                                for (int newc = c; newc >=0; newc--){
-//                                    if(newc <= newb && newb <= newa){
-//                                        System.out.println(newa + ": " + newb + ": " + newc);
-//                                    }
-//                                }
-//                            }
-//                        }
 
-
+                        //start resulting boards
                         for (int newc = c; newc >= 0; newc--) {
                             if (newc != c) {
                                 System.out.println(a + ": " + b + ": " + newc);
+                                ResultingBoards.add(new Boards(a,b,newc));
                             }
                         }
                         for (int newb = b; newb >= 0; newb--) {
@@ -49,10 +42,12 @@ public class MyPlayer {
                                 int newc = newb;
                                 if (newb != b && newc != c) {
                                     System.out.println(a + ": " + newb + ": " + newc);
+                                    ResultingBoards.add(new Boards(a,newb,newc));
                                 }
                             } else {
                                 if (newb != b && c == c) {
                                     System.out.println(a + ": " + newb + ": " + c);
+                                    ResultingBoards.add(new Boards(a,newb,c));
 //                                }
                                 }
                             }
@@ -63,65 +58,79 @@ public class MyPlayer {
                                 int newc = newa;
                                 if (newa != a) {
                                     System.out.println(newa + ": " + newb + ": " + newc);
+                                    ResultingBoards.add(new Boards(newa,newb,newc));
                                 }
                             } else {
                                 if (newa != a) {
                                     System.out.println(newa + ": " + b + ": " + c);
-//                                }
+                                    ResultingBoards.add(new Boards(newa,b,c));
                                 }
-//                            int newb = newa;
-//                            int newc = newa;
-//                            System.out.println(newa + ": " + newb + ": " + newc);
                             }
                         }
-//                        while (newc>=0){
-//                            newc =- newc;
-//                            System.out.println(a + ": " + b + ": " + newc);
-//                        }
+                        //end resulting boards
 
+                        //start sorting
+                        boolean isLifeBoard = true;
+                        for (Boards board : ResultingBoards) {
+                            for (Boards deathBoard: DeathBoards) {
+                                if(isLifeBoard ==false){
+                                    break;
+                                }
+                                if (board.x == deathBoard.x && board.y == deathBoard.y && board.z == deathBoard.z) {
+                                    LifeBoards.add(new Boards(a, b, c));
+                                    //System.out.println("found death board");
+                                    isLifeBoard=false;
 
-//                        int newa = a;
-//                        while(newa>0) {
-//                            int newb = b;
-//                            int newc = c;
-//                            if (newa > newb) {
-//                                newa = newa - 1;
-//                            } else if (newa == newb && newb > newc) {
-//                                newa = newa - 1;
-//                                newb = newb - 1;
-//                            } else {
-//                                newa = newa - 1;
-//                                newb = newb - 1;
-//                                newc = newc - 1;
+                                }else{
+                                  //  isLifeBoard=true;
+                                }
+                                //System.out.println(isLifeBoard);
+                            }
+//                            for(Boards lifeBoard: LifeBoards){
+//                                if(board.x!=lifeBoard.x || board.y!=lifeBoard.y || board.z!=lifeBoard.z){
+//                                    LifeBoards.add(new Boards(a,b,c));
+//                                }else
 //                            }
-//                            System.out.println(newa + ": " + newb + ": " + newc);
-//                        }
-//                            for (int x = 1; x<a+1;x++){
-//                                for (int y = 0; y<b+1; y++){
-//                                    for (int z = 0; z < c+1; z++){
-//                                        if (z <= y && y <= x){
-//                                            System.out.println(x + ": " + y + ": " + z);
-//                                        }
-//                                    }
-//                                }
-//                            }
+                        }
+                        if(isLifeBoard==true){
+                            //System.out.println("Adding death board");
+                            DeathBoards.add(new Boards(a,b,c));
+                        }
+                        //end sorting
 
-
-
+                        //start best move
+                        for (Boards resultingBoard: ResultingBoards){
+                            for (Boards deathBoard: DeathBoards){
+                                if (resultingBoard.x==deathBoard.x && resultingBoard.y==deathBoard.y && resultingBoard.z==deathBoard.z){
+                                    System.out.println(a+": "+b+": "+c);
+                                    System.out.println("best move: "+ deathBoard.x +": "+deathBoard.y+": "+deathBoard.z);
+                                    break;
+                                }
+                                break;
+                            }
+                            break;
+                        }
+                        //end best move
                     }
                 }
             }
         }
-
-        categorizeBoards();
+        System.out.println("death boards:");
+        for (Boards board:DeathBoards){
+            board.printBoard();
+        }
+        System.out.println("life boards:");
+        for (Boards board:LifeBoards){
+            board.printBoard();
+        }
 
     }
 
-    public void categorizeBoards(){
 
-        DeathBoards.add(new Boards(1,0,0));
-    }
-
+//    public void categorizeBoards(){
+//        DeathBoards.add(new Boards(1,0,0));
+//
+//    }
 
     public Point move(Chip[][] pBoard) {
 

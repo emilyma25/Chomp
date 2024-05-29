@@ -1,17 +1,17 @@
 public class Boards {
 
-    public int a;
-    public int b;
-    public int c;
+    public int x;
+    public int y;
+    public int z;
 
-    public Boards(int pA, int pB, int pC){
-        a = pA;
-        b = pB;
-        c = pC;
+    public Boards(int pX, int pY, int pZ){
+        x = pX;
+        y = pY;
+        z = pZ;
     }
 
     public void printBoard(){
-        System.out.println(a + ": " + b + ": " + c);
+        System.out.println(x + ": " + y + ": " + z);
     }
 
 }
