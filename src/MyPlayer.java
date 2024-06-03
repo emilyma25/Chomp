@@ -22,148 +22,251 @@ public class MyPlayer {
          * This code will run just once, when the game opens.
          * Add your code here.
          */
-        for (int a=1;a<5;a++){
-            for (int b=0;b<5;b++) {
-                for (int c = 0; c < 5; c++) {
-                    for(int d=0;d<5;d++) {
-                        if (d<=c && c <= b && b <= a) {
-                            System.out.println(" ");
-                            System.out.println(a + ": " + b + ": " + c + ": " + d);
-                            System.out.println("resulting boards:");
-                            ArrayList<Boards> ResultingBoards = new ArrayList<>();
+        for (int a=1;a<7;a++){
+            for (int b=0;b<7;b++) {
+                for (int c=0; c<7; c++) {
+                    for(int d=0;d<7;d++) {
+                        for (int e=0;e<7;e++) {
+                            for(int f=0;f<7;f++) {
+                                if (d <= c && c <= b && b <= a) {
+                                    System.out.println(" ");
+                                    System.out.println(a + ": " + b + ": " + c + ": " + d + ": " + e);
+                                    System.out.println("resulting boards:");
+                                    ArrayList<Boards> ResultingBoards = new ArrayList<>();
 
-                            //make an array list for each board of its resulting boards
-                            //run through to check for life or death
-                            //clear at end and restart??
+                                    //make an array list for each board of its resulting boards
+                                    //run through to check for life or death
+                                    //clear at end and restart??
 
-                            //start resulting boards
-                            for(int newd=d;newd>=0;newd--){
-                                if (newd != d) {
-                                    System.out.println(a + ": " + b + ": " + c + ": " + newd);
-                                    ResultingBoards.add(new Boards(a, b, c,newd, 0, 0));
-                                }
-                            }
-                            for (int newc = c; newc >= 0; newc--) {
-//                                if (newc != c) {
-//                                    System.out.println(a + ": " + b + ": " + newc);
-//                                    ResultingBoards.add(new Boards(a, b, newc, 0, 0));
-//                                }
-                                if (d > newc) {
-                                    int newd = newc;
-                                    if (newc != c && newd != d) {
-                                        System.out.println(a + ": " + b + ": " + newc + ": " + newd);
-                                        ResultingBoards.add(new Boards(a, b, newc, newd,0, 0));
-                                    }
-                                } else {
-                                    if (newc != c) {
-                                        System.out.println(a + ": " + b + ": " + newc + ": " + d);
-                                        ResultingBoards.add(new Boards(a, b, newc, d,0, 0));
-                                    }
-                                }
-                            }
-                            for (int newb = b; newb >= 0; newb--) {
-                                if (d > newb) {
-                                    int newc = newb;
-                                    int newd = newb;
-                                    if (newb != b && newc != c && newd != d) {
-                                        System.out.println(a + ": " + newb + ": " + newc + ": " + newd);
-                                        ResultingBoards.add(new Boards(a, newb, newc, newd,0, 0));
-                                    }
-                                } else if (d <= newb && c > newb){
-                                    int newc = newb;
-                                    if (newb != b && newc != c) {
-                                        System.out.println(a + ": " + newb + ": " + newc + ": " + d);
-                                        ResultingBoards.add(new Boards(a, newb, newc, d,0, 0));
-                                    }
-                                }else{
-                                    if(newb != b){
-                                        System.out.println(a + ": " + newb + ": " + c + ": " + d);
-                                        ResultingBoards.add(new Boards(a, newb, c, d,0, 0));
-                                    }
-                                }
-                            }
-                            for (int newa = a; newa > 0; newa--) {
-                                if (d > newa) {
-                                    int newb = newa;
-                                    int newc = newa;
-                                    int newd = newa;
-                                    if (newa != a) {
-                                        System.out.println(newa + ": " + newb + ": " + newc + ": " + newd);
-                                        ResultingBoards.add(new Boards(newa, newb, newc, newd,0, 0));
-                                    }
-                                } else if(c>newa && d<=newa){
-                                    int newb = newa;
-                                    int newc = newa;
-                                    if (newa != a) {
-                                        System.out.println(newa + ": " + newb + ": " + newc + ": " + d);
-                                        ResultingBoards.add(new Boards(newa, newb, newc, d,0, 0));
-                                    }
-                                }else if(b>newa && c<=newa && d<=newa){
-                                    int newb=newa;
-                                    if (newa != a) {
-                                        System.out.println(newa + ": " + newb + ": " + c + ": " + d);
-                                        ResultingBoards.add(new Boards(newa, newb, c, d,0, 0));
-                                    }
-                                }else {
-                                    if (newa != a) {
-                                        System.out.println(newa + ": " + b + ": " + c + ": " + d);
-                                        ResultingBoards.add(new Boards(newa, b, c, d,0, 0));
-                                    }
-                                }
-                            }
-                            //end resulting boards
-
-                            //start sorting
-                            System.out.println(" ");
-                            boolean isLifeBoard = true;
-                            for (Boards board : ResultingBoards) {
-                                for (Boards deathBoard : DeathBoards) {
-                                    if (isLifeBoard == false) {
-                                        break;
-                                    }
-                                    if (board.aa == deathBoard.aa && board.bb == deathBoard.bb && board.cc == deathBoard.cc && board.dd == deathBoard.dd) {
-                                        //add move here and then add to life boards list
-
-                                        if (a != board.aa) {
-                                            bestMoveColumn = 0;
-                                            bestMoveRow = board.aa;
-                                        } else if (b != board.bb) {
-                                            bestMoveColumn = 1;
-                                            bestMoveRow = board.bb;
-                                        } else if (c != board.cc) {
-                                            bestMoveColumn = 2;
-                                            bestMoveRow = board.cc;
-                                        }else if (d != board.dd){
-                                            bestMoveColumn = 3;
-                                            bestMoveRow = board.dd;
+                                    //start resulting boards
+                                    //column 6
+                                    for (int newf = f; newf >= 0; newf--){
+                                        if (newf != f){
+                                            System.out.println(a + ": " + b + ": " + c + ": " + d + ": " + e + ": " + newf);
+                                            ResultingBoards.add(new Boards(a, b, c, d, e, newf, 0, 0));
                                         }
-                                        LifeBoards.add(new Boards(a, b, c, d, bestMoveColumn, bestMoveRow));
-                                        //System.out.println("found death board");
-                                        isLifeBoard = false;
-
-                                    } else {
-                                        //  isLifeBoard=true;
                                     }
-                                    //System.out.println(isLifeBoard);
-                                }
+                                    //column 5
+                                    for (int newe = e; newe >= 0; newe--) {
+//                                        if (newe != e) {
+//                                            System.out.println(a + ": " + b + ": " + c + ": " + d + ": " + newe);
+//                                            ResultingBoards.add(new Boards(a, b, c, d, newe, 0, 0));
+//                                        }
+                                        if (f > newe) {
+                                            int newf = newe;
+                                            if (newe != e && newf != f) {
+                                                System.out.println(a + ": " + b + ": " + c + ": " + d + ": " + newe + ": " + newf);
+                                                ResultingBoards.add(new Boards(a, b, c, d, newe, newf,0, 0));
+                                            }
+                                        } else {
+                                            if (newe != e) {
+                                                System.out.println(a + ": " + b + ": " + c + ": " + d + ": " + newe + ": " + f);
+                                                ResultingBoards.add(new Boards(a, b, c, d, newe, f,0, 0));
+                                            }
+                                        }
+                                    }
+                                    //column 4
+                                    for (int newd = d; newd >= 0; newd--) {
+                                        if (f > newd) {
+                                            int newf = newd;
+                                            int newe = newd;
+                                            if (newd != d && newe != e && newf != f) {
+                                                System.out.println(a + ": " + b + ": " + c + ": " + newd + ": " + newe + ": " + newf);
+                                                ResultingBoards.add(new Boards(a, b, c, newd, newe, newf, 0, 0));
+                                            }
+                                        } else if(f<=newd && e>newd){
+                                            int newe = newd;
+                                            if (newd != d && e > newd){
+                                                System.out.println(a + ": " + b + ": " + c + ": " + newd + ": " + newe + ": " + f);
+                                                ResultingBoards.add(new Boards(a, b, c, newd, newe, f,0, 0));
+                                            }
+                                        } else {
+                                            if (newd != d) {
+                                                System.out.println(a + ": " + b + ": " + c + ": " + newd + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(a, b, c, newd, e, f,0, 0));
+                                            }
+                                        }
+                                    }
+                                    //column 3
+                                    for (int newc = c; newc >= 0; newc--) {
+                                        if (f > newc) {
+                                            int newd = newc;
+                                            int newe = newc;
+                                            int newf = newc;
+                                            if (newc != c && newd != d && newe != e) {
+                                                System.out.println(a + ": " + b + ": " + newc + ": " + newd + ": " + newe + ": " + newf);
+                                                ResultingBoards.add(new Boards(a, b, newc, newd, newe, newf,0, 0));
+                                            }
+                                        } else if (f <= newc && e > newc) {
+                                            int newd = newc;
+                                            int newe = newc;
+                                            if (newc != c && newd != d) {
+                                                System.out.println(a + ": " + b + ": " + newc + ": " + newd + ": " + newe + ": " + f);
+                                                ResultingBoards.add(new Boards(a, b, newc, newd, newe, f,0, 0));
+                                            }
+                                        } else if (e <= newc && d > newc){
+                                            int newd = newc;
+                                            if (newc != c && newd != d) {
+                                                System.out.println(a + ": " + b + ": " + newc + ": " + newd + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(a, b, newc, newd, e, f,0, 0));
+                                            }
+                                        }
+                                        else {
+                                            if (newc != c) {
+                                                System.out.println(a + ": " + b + ": " + newc + ": " + d + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(a, b, newc, d, e, f,0, 0));
+                                            }
+                                        }
+                                    }
+                                    //column 2
+                                    for (int newb = b; newb >= 0; newb--) {
+                                        if (f > newb) {
+                                            int newc = newb;
+                                            int newd = newb;
+                                            int newe = newb;
+                                            int newf = newb;
+                                            if (newb != b && newc != c && newd != d) {
+                                                System.out.println(a + ": " + newb + ": " + newc + ": " + newd + ": " + newe + ": " + newf);
+                                                ResultingBoards.add(new Boards(a, newb, newc, newd, newe, newf, 0,0));
+                                            }
+                                        } else if (f <= newb && e > newb) {
+                                            int newc = newb;
+                                            int newd = newb;
+                                            int newe = newb;
+                                            if (newb != b && newc != c) {
+                                                System.out.println(a + ": " + newb + ": " + newc + ": " + newd + ": " + newe + ": " + f);
+                                                ResultingBoards.add(new Boards(a, newb, newc, newd, newe, f,0, 0));
+                                            }
+                                        } else if (d > newb && e <= newb) {
+                                            int newc = newb;
+                                            int newd = newb;
+                                            if (newb != b) {
+                                                System.out.println(a + ": " + newb + ": " + newc + ": " + newd + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(a, newb, newc, newd, e, f,0, 0));
+                                            }
+                                        } else if (d <= newb && c > newb){
+                                            int newc = newb;
+                                            if (newb != b){
+                                                System.out.println(a + ": " + newb + ": " + newc + ": " + d + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(a, newb, newc, d, e, f,0, 0));
+                                            }
+                                        }
+                                        else {
+                                            if (newb != b) {
+                                                System.out.println(a + ": " + newb + ": " + c + ": " + d + ": " + e);
+                                                ResultingBoards.add(new Boards(a, newb, c, d, e, f,0, 0));
+                                            }
+                                        }
+                                    }
+                                    //column 1
+                                    for (int newa = a; newa > 0; newa--) {
+                                        if (f > newa) {
+                                            int newb = newa;
+                                            int newc = newa;
+                                            int newd = newa;
+                                            int newe = newa;
+                                            int newf = newa;
+                                            if (newa != a) {
+                                                System.out.println(newa + ": " + newb + ": " + newc + ": " + newd + ": " + newe + ": " + newf);
+                                                ResultingBoards.add(new Boards(newa, newb, newc, newd, newe, newf,0, 0));
+                                            }
+                                        } else if (e > newa && f <= newa) {
+                                            int newb = newa;
+                                            int newc = newa;
+                                            int newd = newa;
+                                            int newe = newa;
+                                            if (newa != a) {
+                                                System.out.println(newa + ": " + newb + ": " + newc + ": " + newd + ": " + newe + ": " + f);
+                                                ResultingBoards.add(new Boards(newa, newb, newc, newd, newe, f,0, 0));
+                                            }
+                                        } else if (d > newa && e <= newa) {
+                                            int newb = newa;
+                                            int newc = newa;
+                                            int newd = newa;
+                                            if (newa != a) {
+                                                System.out.println(newa + ": " + newb + ": " + newc + ": " + newd + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(newa, newb, newc, newd, e, f,0, 0));
+                                            }
+                                        } else if (c > newa && d <= newa) {
+                                            int newb = newa;
+                                            int newc = newa;
+                                            if (newa != a) {
+                                                System.out.println(newa + ": " + newb + ": " + newc + ": " + d + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(newa, newb, newc, d, e, f,0, 0));
+                                            }
+                                        } else if (b > newa && c <= newa){
+                                            int newb = newa;
+                                            if (newa != a) {
+                                                System.out.println(newa + ": " + newb + ": " + c + ": " + d + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(newa, newb, c, d, e, f,0, 0));
+                                            }
+                                        }
+                                        else {
+                                            if (newa != a) {
+                                                System.out.println(newa + ": " + b + ": " + c + ": " + d + ": " + e + ": " + f);
+                                                ResultingBoards.add(new Boards(newa, b, c, d, e, f,0, 0));
+                                            }
+                                        }
+                                    }
+                                    //end resulting boards
+
+                                    //start sorting
+                                    System.out.println(" ");
+                                    boolean isLifeBoard = true;
+                                    for (Boards board : ResultingBoards) {
+                                        for (Boards deathBoard : DeathBoards) {
+                                            if (isLifeBoard == false) {
+                                                break;
+                                            }
+                                            if (board.aa == deathBoard.aa && board.bb == deathBoard.bb && board.cc == deathBoard.cc && board.dd == deathBoard.dd && board.ee == deathBoard.ee && board.ff == deathBoard.ff) {
+                                                //add move here and then add to life boards list
+
+                                                if (a != board.aa) {
+                                                    bestMoveColumn = 0;
+                                                    bestMoveRow = board.aa;
+                                                } else if (b != board.bb) {
+                                                    bestMoveColumn = 1;
+                                                    bestMoveRow = board.bb;
+                                                } else if (c != board.cc) {
+                                                    bestMoveColumn = 2;
+                                                    bestMoveRow = board.cc;
+                                                } else if (d != board.dd) {
+                                                    bestMoveColumn = 3;
+                                                    bestMoveRow = board.dd;
+                                                } else if (e != board.ee) {
+                                                    bestMoveColumn = 4;
+                                                    bestMoveRow = board.ee;
+                                                } else if (f != board.ff) {
+                                                    bestMoveColumn = 5;
+                                                    bestMoveRow = board.ff;
+                                                }
+                                                LifeBoards.add(new Boards(a, b, c, d, e, f, bestMoveColumn, bestMoveRow));
+                                                //System.out.println("found death board");
+                                                isLifeBoard = false;
+
+                                            } else {
+                                                //  isLifeBoard=true;
+                                            }
+                                            //System.out.println(isLifeBoard);
+                                        }
 //                            for(Boards lifeBoard: LifeBoards){
 //                                if(board.x!=lifeBoard.x || board.y!=lifeBoard.y || board.z!=lifeBoard.z){
 //                                    LifeBoards.add(new Boards(a,b,c));
 //                                }else
 //                            }
-                            }
-                            if (isLifeBoard == true) {
-                                //System.out.println("Adding death board");
-                                if (a == 1) {
-                                    bestMoveRow = 0;
-                                } else {
-                                    bestMoveRow = 1;
-                                }
-                                DeathBoards.add(new Boards(a, b, c, d,0, bestMoveRow));
-                            }
-                            //end sorting
+                                    }
+                                    if (isLifeBoard == true) {
+                                        //System.out.println("Adding death board");
+                                        if (a == 1) {
+                                            bestMoveRow = 0;
+                                        } else {
+                                            bestMoveRow = 1;
+                                        }
+                                        DeathBoards.add(new Boards(a, b, c, d, e, f, 0, bestMoveRow));
+                                    }
+                                    //end sorting
 
-                            //start best move
+                                    //start best move
 //                        System.out.println("best move 1");
 //                        for (Boards resultingBoard: ResultingBoards){
 //                            for (Boards deathBoard: DeathBoards){
@@ -176,7 +279,9 @@ public class MyPlayer {
 //                            }
 //                            break;
 //                        }
-                            //end best move
+                                    //end best move
+                                }
+                            }
                         }
                     }
                 }
@@ -213,7 +318,7 @@ public class MyPlayer {
         row = 1;
         column = 1;
 
-        int[] thisBoard = {0, 0, 0, 0};
+        int[] thisBoard = {0, 0, 0, 0, 0, 0};
 
         for(int i=0; i< gameBoard.length;i++){
             for(int j=0;j<gameBoard[i].length; j++){
@@ -228,14 +333,14 @@ public class MyPlayer {
         }
 
         for (Boards board : DeathBoards) {
-            if (board.aa == thisBoard[0] && board.bb == thisBoard[1] && board.cc == thisBoard[2] && board.dd == thisBoard[3]) {
+            if (board.aa == thisBoard[0] && board.bb == thisBoard[1] && board.cc == thisBoard[2] && board.dd == thisBoard[3] && board.ee == thisBoard[4] && board.ff == thisBoard[5]) {
                 //add move here and then add to life boards list
                 column = board.bestMoveRow;
                 row = board.bestMoveColumn;
             }
         }
         for (Boards board: LifeBoards){
-            if (board.aa == thisBoard[0] && board.bb == thisBoard[1] && board.cc == thisBoard[2] && board.dd == thisBoard[3]) {
+            if (board.aa == thisBoard[0] && board.bb == thisBoard[1] && board.cc == thisBoard[2] && board.dd == thisBoard[3] && board.ee == thisBoard[4] && board.ff == thisBoard[5]) {
                 //add move here and then add to life boards list
                 column = board.bestMoveRow;
                 row = board.bestMoveColumn;
