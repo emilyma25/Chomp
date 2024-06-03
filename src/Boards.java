@@ -1,23 +1,25 @@
 public class Boards {
 
-    public int x;
-    public int y;
-    public int z;
+    public int aa;
+    public int bb;
+    public int cc;
+    public int dd;
     public int bestMoveColumn;
     public int bestMoveRow;
 
 
 
-    public Boards(int pX, int pY, int pZ, int pBestMoveColumn, int pBestMoveRow){
-        x = pX;
-        y = pY;
-        z = pZ;
+    public Boards(int pAa, int pBb, int pCc, int pDd,  int pBestMoveColumn, int pBestMoveRow){
+        aa = pAa;
+        bb = pBb;
+        cc = pCc;
+        dd = pDd;
         bestMoveColumn = pBestMoveColumn;
         bestMoveRow = pBestMoveRow;
     }
 
     public void printBoard(){
-        System.out.println(x + ": " + y + ": " + z + ", best move: (" + bestMoveColumn + ", " + bestMoveRow + ")");
+        System.out.println(aa + ": " + bb + ": " + cc + ": " + dd + ", best move: (" + bestMoveColumn + ", " + bestMoveRow + ")");
     }
 
 
